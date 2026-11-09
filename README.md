@@ -34,14 +34,22 @@ As credenciais ficam em `src/main/resources/application.yml`:
 
 ```yaml
 paypal:
-  client-id: SEU_CLIENT_ID
-  client-secret: SEU_CLIENT_SECRET
-  client-mode: sandbox   # sandbox para testes, live para produção
+  client-id: ${PAYPAL_CLIENT_ID}
+  client-secret: ${PAYPAL_CLIENT_SECRET}
+  client-mode: ${PAYPAL_CLIENT_MODE:sandbox}
+```
+
+Os valores vêm de variáveis de ambiente:
+
+```bash
+export PAYPAL_CLIENT_ID="..."
+export PAYPAL_CLIENT_SECRET="..."
+export PAYPAL_CLIENT_MODE="sandbox"   # sandbox para testes, live para produção
 ```
 
 Pegue as suas em <https://developer.paypal.com/dashboard/applications/sandbox>.
 
-> **Atenção:** o repositório hoje traz credenciais de **sandbox** commitadas no `application.yml`. Elas não movimentam dinheiro real, mas o padrão correto é externalizá-las em variáveis de ambiente e nunca versionar credenciais, inclusive as de sandbox.
+> **Nota:** versões anteriores deste repositório traziam credenciais de **sandbox** commitadas no `application.yml`. Elas foram externalizadas para variáveis de ambiente, mas seguem no histórico de commits — então o par client-id/client-secret antigo deve ser revogado e recriado no dashboard do PayPal.
 
 ## Como rodar
 
